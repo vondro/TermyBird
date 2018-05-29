@@ -22,8 +22,8 @@ public class Bird {
 		this.posX = 5;
 		this.posY = screen.getTerminalSize().getRows() / 2;
 		this.text = "bird";
-		this.acceleration = 10.0;
-		this.innitialVelocity = 5.0;
+		this.acceleration = 15.0;
+		this.innitialVelocity = 3.0;
 		this.previousVelocity = 0.0;
 		this.velocity = innitialVelocity;
 		this.velocityUp = -10.0;
@@ -52,7 +52,7 @@ public class Bird {
 				distance += 1.0;
 			} else if (velocity > 0 && previousVelocity < 0) {
 				// when the velocity increases above 0
-				distance = 0.75;
+				distance = 0.95;
 			}
 		}
 	}

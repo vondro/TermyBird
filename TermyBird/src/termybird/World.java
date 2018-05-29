@@ -98,29 +98,29 @@ public class World {
 		    }
 		    
 		    if (gameRuns) {
-			
-			    // print the bird
-				bird.print();
-				
+		    	
+		    	// calculate pipes movement
+				pipes.move(timeCurrent, timePrevious);	
 				// calculate the falling distance and change position
 				bird.fall(timeCurrent, timePrevious);
-				
-				// print pipes
-				pipes.print();
-				
-				// calculate pipes movement
-				pipes.move(timeCurrent, timePrevious);				
-				
-				screen.refresh();
-				timePrevious = timeCurrent;
-				
+			
 				if (isCollision(bird, pipes, screen)) {
 					initWorld();
 					printMessage(screen, "Mission failed, press SPACE to continue");
 					screen.refresh();
 					gameRuns = false;
 					missionFailed = true;
+					continue;
 				}
+				
+				// print pipes
+				pipes.print();
+			    // print the bird
+				bird.print();
+				
+				screen.refresh();
+				timePrevious = timeCurrent;
+				
 		    }
 		    
 		    // 1000 millis / 17 = approx. 60FPS
@@ -138,9 +138,9 @@ public class World {
 		
 		// detect collision with pipes
 		for (Pipe pipe : pipes.pipes) {
-			if (bird.posX + bird.text.length() > pipe.posX && 
-				bird.posX + bird.text.length() < pipe.posX+pipe.text.length()-1 &&
-				(bird.posY < pipe.topPartBoundaryY || bird.posY > pipe.bottomPartBoundaryY)) {
+			if (bird.posX + bird.text.length() >= pipe.posX && 
+				bird.posX + bird.text.length() <= pipe.posX+pipe.text.length()-1 &&
+				(bird.posY <= pipe.topPartBoundaryY || bird.posY >= pipe.bottomPartBoundaryY)) {
 				return true;
 			}
 		}		
