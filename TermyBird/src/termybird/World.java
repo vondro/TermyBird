@@ -20,6 +20,8 @@ public class World {
 	
 	public World(Terminal terminal) throws IOException {
 		this.terminal = terminal;
+		screen = new TerminalScreen(terminal);
+		screen.startScreen();
 		initWorld();
 	}
 	
@@ -44,9 +46,8 @@ public class World {
 	}
 	
 	public void initWorld() throws IOException {
-		screen = new TerminalScreen(terminal);
-		screen.startScreen();
 		screen.setCursorPosition(null);
+		screen.clear();
 
 		this.bird = new Bird(screen);
 		this.pipes = new PipeContainer(screen);
